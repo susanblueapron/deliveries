@@ -39,20 +39,37 @@ export default class Account extends Component {
     return props
   }
 
+  renderCountdown(dateToFormat, arrivalDate) {
+    return (
+      <li key={arrivalDate}>
+        <Countdown
+          date={dateToFormat}
+          renderer={renderer}
+        /> to receive by <Moment format='dddd, MMM Do'>{arrivalDate}</Moment>
+      </li>
+    )
+  }
+
   render () {
     const { deliveries } = this.props
-    const arrival_date = '2019-02-14';
-    const dateToFormat = deliveries[arrival_date][0];
 
     return (
       <Container>
         <Row>
-        <Countdown
-          date={dateToFormat}
-          renderer={renderer}
-        /> to receive by <Moment format='dddd, MMM Do'>{arrival_date}</Moment>
+          <ul>
+          {
+            Object.keys(deliveries).map(arrivalDate => {
+              const deliveryDate = deliveries[arrivalDate][0];
+              if (deliveryDate == null) {
+                return deliveryDate;
+              }
+
+              return this.renderCountdown(deliveryDate, arrivalDate)
+            })
+          }
+          </ul>
         </Row>
       </Container>
-    )
+    );
   }
 }
