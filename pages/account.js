@@ -17,12 +17,11 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   } else {
     // Render a countdown
     return (
-      <div className='container'>
-        Customize within <span className='DeliveryCutoffCountdownTimer'>
+      <span>
+        Order in <span className='DeliveryCutoffCountdownTimer'>
         {days}day {hours}hr {minutes}min {seconds}sec
-        to receive by Monday
         </span>
-      </div>
+      </span>
     );
   }
 };
@@ -42,17 +41,16 @@ export default class Account extends Component {
 
   render () {
     const { deliveries } = this.props
+    const arrival_date = '2019-02-14';
+    const dateToFormat = deliveries[arrival_date][0];
 
-    const dateToFormat = deliveries['2019-02-16'];
     return (
       <Container>
         <Row>
-        <h1>{dateToFormat}</h1>
-        <Moment date={dateToFormat} />
         <Countdown
-          date={Date.parse(deliveries['2019-02-16'])}
+          date={dateToFormat}
           renderer={renderer}
-        />
+        /> to receive by <Moment format='dddd, MMM Do'>{arrival_date}</Moment>
         </Row>
       </Container>
     )

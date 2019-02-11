@@ -1,5 +1,4 @@
 import Link, { prefetch } from '../components/link'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 // we just render a list of 3 accounts having 2 with prefetched data
 export default () => (
